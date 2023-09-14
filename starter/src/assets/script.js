@@ -161,5 +161,5 @@ module.exports = {
   pay, 
   emptyCart,
   /* Uncomment the following line if completing the currency converter bonus */
-  // currency
+  currency
 }
