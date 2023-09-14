@@ -48,32 +48,18 @@ const cart = []
   - if the product is not already in the cart, add it to the cart
 */
 function addProductToCart(productId){
-  let product;
-
-  //Find product in product array
-  for (let i = 0; i < products.length; i++) {
-    if (products[i].productId === productId) {
-      product = products[i];
-      break;
-    }
-  }
-
+  
+  let product = products.find(item => item.productId == productId);
+  
   //If product is found
   if(product){
     //Increase product quantity
     product.quantity += 1;
 
-    let isProductInCart = false;
-    //Check if the product is in the cart
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].productId === productId) {
-        isProductInCart = true;
-        break;
-      }
-    }
+    let productInCart = cart.find(item => item.productId == productId);
 
     //If product is not in cart, add product to cart
-    if(!isProductInCart){
+    if(productInCart == undefined){
       cart.push(product);
     }
   }
