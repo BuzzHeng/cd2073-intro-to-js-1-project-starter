@@ -13,7 +13,8 @@ const product1 = {
     price: 2.00,
     quantity: 0,
     productId: 9001,
-    image: "images/cherry.jpg"
+    image: "images/cherry.jpg",
+    originalPrice: 2.00
 };
 
 const product2 = {
@@ -21,7 +22,8 @@ const product2 = {
     price: 3.50,
     quantity: 0,
     productId: 9002,
-    image: "images/orange.jpg"
+    image: "images/orange.jpg",
+    originalPrice: 3.50
 };
 
  const product3 = {
@@ -29,7 +31,8 @@ const product2 = {
     price: 4.00,
     quantity: 0,
     productId: 9003,
-    image: "images/strawberry.jpg"
+    image: "images/strawberry.jpg",
+    originalPrice: 4.00
 };
 
 products.push(product1,product2,product3);
@@ -143,6 +146,36 @@ function pay(amount){
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
+/* Create a function named currency that takes in an selectedCurrency as an argument
+  - if selectedCurrency is "EUR", set conversionRate of EUR
+  - if selectedCurrency is "YEN", set conversionRate of EUR
+  - Call function named updateCurrencyPrice to update product price
+  - Call function named updateCurrencyPrice to update cart price
+*/
+function currency(selectedCurrency){
+  let conversionRate = 1;
+  if (selectedCurrency === "EUR"){
+    conversionRate = 0.93;
+  }
+  else if (selectedCurrency === "YEN"){
+    conversionRate = 147;
+  }
+  updateCurrencyPrice(products,conversionRate);
+  updateCurrencyPrice(cart,conversionRate);
+}
+
+/* Create a function named updateCurrencyPrice that takes in productArr and conversionRate as argument
+  - Access the original price property of each item
+  - Calculate the updated price in the selected currency
+  - Update the price property of the item with the updated price
+*/
+function updateCurrencyPrice(productArr,conversionRate) {
+  productArr.forEach((item) => {
+    const originalPrice = item.originalPrice;
+    const updatedPrice = (originalPrice * conversionRate).toFixed(2);
+    item.price = updatedPrice;
+  });
+}
 
 /* The following is for running unit tests. 
    To fully complete this project, it is expected that all tests pass.
